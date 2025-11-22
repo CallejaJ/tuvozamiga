@@ -1,0 +1,41 @@
+# Node
+node_modules/
+
+# Build output
+.next/
+out/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+
+# VSCode
+.vscode/
+
+# Others
+*.local
+*.cache
+*.log
+*.tmp
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+coverage/
+
+# Optional: ignore lock files if not needed
+# package-lock.json
+yarn.lock
+pnpm-lock.yaml
