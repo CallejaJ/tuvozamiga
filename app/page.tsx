@@ -107,6 +107,21 @@ function DemoComponent() {
     }
   };
 
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case "connecting":
+        return "CONECTANDO";
+      case "connected":
+        return "CONECTADO";
+      case "disconnected":
+        return "DESCONECTADO";
+      case "closed":
+        return "CERRADO";
+      default:
+        return status.toUpperCase();
+    }
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
       <div className="p-6 md:p-8">
@@ -122,7 +137,7 @@ function DemoComponent() {
               }`}
             />
             <span className="font-medium text-slate-700 capitalize">
-              Estado: {connectionState}
+              Estado: {getStatusText(connectionState)}
             </span>
           </div>
 
@@ -181,17 +196,7 @@ function DemoComponent() {
         </div>
 
         {connectionState === "connected" && (
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <button
-              onClick={handleToggleCamera}
-              className={`p-4 rounded-lg font-medium transition-colors ${
-                isCameraOn
-                  ? "bg-indigo-100 text-indigo-700 border-2 border-indigo-300"
-                  : "bg-slate-100 text-slate-600 border-2 border-slate-200"
-              }`}
-            >
-              {isCameraOn ? "📹 Cámara Encendida" : "📷 Cámara Apagada"}
-            </button>
+          <div className="grid grid-cols-1 gap-4 mb-6">
             <button
               onClick={toggleMic}
               className={`p-4 rounded-lg font-medium transition-colors ${
