@@ -153,8 +153,8 @@ function DemoComponent() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
-      <div className="p-4 md:p-8">
-        <div className="flex flex-col gap-6 mb-6">
+      <div className="p-6 md:p-10">
+        <div className="flex flex-col gap-8 mb-8">
           {/* Status Indicator - Centered on mobile, left on desktop */}
           <div className="flex items-center justify-center md:justify-start space-x-3 bg-slate-50 w-fit mx-auto md:mx-0 px-4 py-2 rounded-full border border-slate-100">
             <div
@@ -212,13 +212,19 @@ function DemoComponent() {
             </div>
           )}
 
-        {connectionState === "connected" && !isMicOn && (
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50">
-            <div className="bg-yellow-500 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium">
-              Por favor active el micrófono para continuar
+          {connectionState === "connected" && !isMicOn && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[90%]">
+              <div className="flex items-center gap-3 bg-slate-900/90 text-white px-6 py-3 rounded-full shadow-lg border border-white/10 backdrop-blur-md animate-in fade-in slide-in-from-bottom-4 duration-300">
+                <div className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                </div>
+                <span className="text-sm font-medium whitespace-nowrap">
+                  Por favor active el micrófono para continuar
+                </span>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
           {!userVideoStream && connectionState !== "connected" && (
             <div className="absolute inset-0 flex items-center justify-center">
