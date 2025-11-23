@@ -151,11 +151,11 @@ function DemoComponent() {
             </div>
           )}
 
-          {!userVideoStream && (
+          {!userVideoStream && connectionState !== "connected" && (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-slate-400">
                 <p className="text-lg mb-2">Click "Start Session" to begin</p>
-                <p className="text-sm">Camera and microphone access required</p>
+                <p className="text-sm">Microphone access required</p>
               </div>
             </div>
           )}
