@@ -29,9 +29,21 @@ export default function WaveVisualizer({
       (window as any).webkitAudioContext)();
     audioContextRef.current = audioContext;
 
+    // Resume context if suspended (browser autoplay policy)
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
     const analyser = audioContext.createAnalyser();
     analyser.fftSize = 256;
     analyserRef.current = analyser;
+
+    // Check if stream has audio tracks
+    const audioTracks = stream.getAudioTracks();
+    if (audioTracks.length === 0) {
+      console.warn("WaveVisualizer: No audio tracks found in stream");
+      return;
+    }
 
     const source = audioContext.createMediaStreamSource(stream);
     source.connect(analyser);
