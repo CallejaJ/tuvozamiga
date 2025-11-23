@@ -1,14 +1,16 @@
-# Orga AI - Real-time AI Interface Demo
+# ACOMPAÑA2 - Tu Compañía Virtual
 
-A Next.js application showcasing real-time AI video and audio processing capabilities powered by Orga AI SDK.
+Una aplicación diseñada para combatir la soledad, proporcionando una voz amiga y escucha activa potenciada por IA.
+
+> **🎧 Recomendación:** Para una mejor experiencia, se recomienda el uso de auriculares.
 
 ## 🚀 Features
 
-- **Real-time Video & Audio Processing**: Experience seamless AI interactions with ultra-low latency
-- **Live Microphone Controls**: Toggle microphone during active sessions
-- **Connection State Management**: Visual feedback for connection status (disconnected, connecting, connected)
-- **Modern UI/UX**: Beautiful, responsive interface built with Tailwind CSS, fully translated to Spanish
-- **Edge Deployment Ready**: Optimized for global edge networks
+- **Siempre Disponible**: Compañía 24/7 con latencia ultra baja
+- **Control de Micrófono**: Tú decides cuándo hablar
+- **Estado de Conexión**: Feedback visual claro del estado de tu compañero
+- **Interfaz Amigable**: Diseño cálido y acogedor, totalmente en español
+- **Escucha Empática**: IA diseñada para comprender y acompañar
 
 ## 📦 Tech Stack
 

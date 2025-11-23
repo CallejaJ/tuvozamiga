@@ -24,18 +24,23 @@ export default function Header() {
           {/* Badge */}
           <div className="inline-flex items-center rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-sm font-medium text-indigo-300 backdrop-blur-xl mb-6">
             <span className="flex h-2 w-2 rounded-full bg-indigo-400 mr-2 animate-pulse"></span>
-            Orga AI v1.0 Beta
+            ACOMPAÑA2 Beta
           </div>
 
           {/* Title */}
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-indigo-400">
-            Interfaces de IA de Próxima Generación
+            ACOMPAÑA2
           </h1>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl leading-relaxed">
-            Experimenta el futuro de la interacción humano-computadora con procesamiento
-            de video y audio en tiempo real, impulsado por Orga AI.
+          <p className="text-lg md:text-xl text-slate-300 mb-6 max-w-2xl leading-relaxed">
+            Tu compañero virtual siempre disponible. Escucha activa, empatía y
+            conversación cuando más lo necesitas.
+          </p>
+
+          {/* Headphones Recommendation */}
+          <p className="text-sm md:text-base text-indigo-300 mb-10 flex items-center justify-center gap-2 bg-indigo-900/30 py-2 px-4 rounded-full border border-indigo-500/20">
+            <span>🎧</span> Se recomienda el uso de auriculares para una mejor experiencia
           </p>
 
           {/* CTA Buttons */}
@@ -44,7 +49,7 @@ export default function Header() {
               href="#demo"
               className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all"
             >
-              Probar Demo
+              Hablar con alguien
             </a>
             <a
               href="https://docs.orga.ai"
