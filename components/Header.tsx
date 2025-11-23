@@ -7,7 +7,7 @@ export default function Header() {
     <header className="relative overflow-hidden bg-slate-900 text-white">
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 to-purple-600/20 pointer-events-none" />
 
-      <div className="container mx-auto px-4 pt-20 pb-24 relative z-10">
+      <div className="container mx-auto px-4 pt-12 pb-16 md:pt-20 md:pb-24 relative z-10">
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
           {/* Logo */}
           <div className="mb-8">
@@ -28,7 +28,7 @@ export default function Header() {
           </div>
 
           {/* Title */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-indigo-400">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-indigo-200 to-indigo-400 px-2">
             ACOMPAÑA2
           </h1>
 

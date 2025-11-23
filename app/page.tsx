@@ -153,9 +153,10 @@ function DemoComponent() {
 
   return (
     <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-200">
-      <div className="p-6 md:p-8">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-          <div className="flex items-center space-x-3">
+      <div className="p-4 md:p-8">
+        <div className="flex flex-col gap-6 mb-6">
+          {/* Status Indicator - Centered on mobile, left on desktop */}
+          <div className="flex items-center justify-center md:justify-start space-x-3 bg-slate-50 w-fit mx-auto md:mx-0 px-4 py-2 rounded-full border border-slate-100">
             <div
               className={`h-3 w-3 rounded-full ${
                 connectionState === "connected"
@@ -165,26 +166,27 @@ function DemoComponent() {
                   : "bg-slate-300"
               }`}
             />
-            <span className="font-medium text-slate-700 capitalize">
+            <span className="font-medium text-slate-700 capitalize text-sm md:text-base">
               Estado: {getStatusText(connectionState)}
             </span>
           </div>
 
-          <div className="flex gap-3">
+          {/* Controls - Stacked on mobile, row on desktop */}
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto sm:ml-auto">
             <button
               onClick={() => startSession()}
               disabled={!canStart}
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm active:scale-95"
             >
-              <Play className="h-4 w-4 mr-2" />
+              <Play className="h-5 w-5 mr-2" />
               Iniciar Sesión
             </button>
             <button
               onClick={() => endSession()}
               disabled={!canEnd}
-              className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-red-50 text-red-600 font-medium hover:bg-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors border border-red-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3 rounded-xl bg-red-50 text-red-600 font-medium hover:bg-red-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all border border-red-200 active:scale-95"
             >
-              <Square className="h-4 w-4 mr-2 fill-current" />
+              <Square className="h-5 w-5 mr-2 fill-current" />
               Terminar Sesión
             </button>
           </div>
