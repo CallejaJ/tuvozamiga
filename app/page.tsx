@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useOrgaAI, OrgaVideo, OrgaAudio } from "@orga-ai/react";
 import { Zap, Shield, Globe, Play, Square, Mic2 } from "lucide-react";
 import { toast } from "sonner";
@@ -97,6 +98,33 @@ function DemoComponent() {
     connectionState === "disconnected" || connectionState === "closed";
   const canEnd = connectionState === "connected";
 
+  const [audioStream, setAudioStream] = React.useState<MediaStream | null>(null);
+
+  React.useEffect(() => {
+    let stream: MediaStream | null = null;
+
+    const getAudioStream = async () => {
+      if (connectionState === "connected" && isMicOn) {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          setAudioStream(stream);
+        } catch (error) {
+          console.error("Error accessing microphone for visualizer:", error);
+        }
+      } else {
+        setAudioStream(null);
+      }
+    };
+
+    getAudioStream();
+
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, [connectionState, isMicOn]);
+
   const handleToggleCamera = async () => {
     try {
       await toggleCamera();
@@ -164,7 +192,7 @@ function DemoComponent() {
 
         <div className="relative bg-slate-900 rounded-xl overflow-hidden aspect-video shadow-inner mb-6">
           {connectionState === "connected" ? (
-            <WaveVisualizer stream={userVideoStream} />
+            <WaveVisualizer stream={audioStream} />
           ) : (
             <OrgaVideo
               stream={userVideoStream}

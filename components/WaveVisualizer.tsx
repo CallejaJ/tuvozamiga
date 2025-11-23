@@ -18,39 +18,41 @@ export default function WaveVisualizer({
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
 
   useEffect(() => {
-    if (!stream || !canvasRef.current) return;
+    if (!canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Initialize Audio Context
-    const audioContext = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
-    audioContextRef.current = audioContext;
+    // Audio Context Setup
+    let audioContext: AudioContext | null = null;
+    let analyser: AnalyserNode | null = null;
+    let source: MediaStreamAudioSourceNode | null = null;
+    let dataArray: Uint8Array | null = null;
 
-    // Resume context if suspended (browser autoplay policy)
-    if (audioContext.state === "suspended") {
-      audioContext.resume();
+    if (stream) {
+      // Initialize Audio Context only if stream exists
+      audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
+      audioContextRef.current = audioContext;
+
+      // Resume context if suspended
+      if (audioContext.state === "suspended") {
+        audioContext.resume();
+      }
+
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 256;
+      analyserRef.current = analyser;
+
+      const audioTracks = stream.getAudioTracks();
+      if (audioTracks.length > 0) {
+        source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+        sourceRef.current = source;
+        dataArray = new Uint8Array(analyser.frequencyBinCount);
+      }
     }
-
-    const analyser = audioContext.createAnalyser();
-    analyser.fftSize = 256;
-    analyserRef.current = analyser;
-
-    // Check if stream has audio tracks
-    const audioTracks = stream.getAudioTracks();
-    if (audioTracks.length === 0) {
-      console.warn("WaveVisualizer: No audio tracks found in stream");
-      return;
-    }
-
-    const source = audioContext.createMediaStreamSource(stream);
-    source.connect(analyser);
-    sourceRef.current = source;
-
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
 
     const draw = () => {
       if (!canvas || !ctx) return;
@@ -58,7 +60,16 @@ export default function WaveVisualizer({
       const width = canvas.width;
       const height = canvas.height;
 
-      analyser.getByteFrequencyData(dataArray);
+      // Get audio data if available
+      let volume = 0;
+      if (analyser && dataArray) {
+        analyser.getByteFrequencyData(dataArray);
+        let sum = 0;
+        for (let i = 0; i < dataArray.length; i++) {
+          sum += dataArray[i];
+        }
+        volume = sum / dataArray.length / 255;
+      }
 
       ctx.clearRect(0, 0, width, height);
 
@@ -66,22 +77,15 @@ export default function WaveVisualizer({
       const centerX = width / 2;
       const centerY = height / 2;
       
-      // Calculate average volume for glow intensity
-      let sum = 0;
-      for (let i = 0; i < bufferLength; i++) {
-        sum += dataArray[i];
-      }
-      const average = sum / bufferLength;
-      const volume = average / 255; // 0 to 1
-
-      // Draw Glow
+      // Draw Glow (always visible but pulses with volume)
+      const glowRadius = 100 + volume * 100 + Math.sin(Date.now() * 0.002) * 10;
       const gradient = ctx.createRadialGradient(
         centerX,
         centerY,
         10,
         centerX,
         centerY,
-        100 + volume * 100
+        glowRadius
       );
       gradient.addColorStop(0, "rgba(6, 182, 212, 0.8)"); // Cyan-500
       gradient.addColorStop(0.5, "rgba(6, 182, 212, 0.2)");
@@ -95,12 +99,22 @@ export default function WaveVisualizer({
       ctx.strokeStyle = "rgba(165, 243, 252, 0.6)"; // Cyan-200
       ctx.beginPath();
 
+      const bufferLength = analyser ? analyser.frequencyBinCount : 128;
       const sliceWidth = width / bufferLength;
       let x = 0;
 
       for (let i = 0; i < bufferLength; i++) {
-        const v = dataArray[i] / 128.0;
-        const y = (v * height) / 2;
+        let v = 0;
+        let waveHeight = 0;
+
+        if (dataArray) {
+           v = dataArray[i] / 128.0;
+           waveHeight = (dataArray[i] / 255) * 50;
+        } else {
+           // Idle wave simulation
+           v = 1;
+           waveHeight = 5;
+        }
 
         // Mirror the wave vertically around the center
         const yOffset = centerY;
@@ -109,9 +123,12 @@ export default function WaveVisualizer({
         if (i === 0) {
           ctx.moveTo(x, yOffset);
         } else {
-          // Simple sine wave modulation based on frequency data
-          const waveHeight = (dataArray[i] / 255) * 50;
-          const waveY = centerY + Math.sin(i * 0.2 + Date.now() * 0.005) * waveHeight;
+          // Sine wave modulation
+          const frequency = 0.2;
+          const speed = 0.005;
+          const idleWave = Math.sin(i * frequency + Date.now() * speed) * (waveHeight + 10);
+          
+          const waveY = centerY + idleWave;
            ctx.lineTo(x, waveY);
         }
 
@@ -137,7 +154,6 @@ export default function WaveVisualizer({
          ctx.stroke();
       }
 
-
       animationRef.current = requestAnimationFrame(draw);
     };
 
@@ -156,8 +172,8 @@ export default function WaveVisualizer({
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
+      if (audioContext) {
+        audioContext.close();
       }
       resizeObserver.disconnect();
     };
