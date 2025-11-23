@@ -52,7 +52,7 @@ export default function Header() {
               Hablar con alguien
             </a>
             <a
-              href="https://docs.orga.ai"
+              href="https://docs.orga-ai.com/docs"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-800/50 px-8 py-3 text-sm font-semibold text-white hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all backdrop-blur-sm"

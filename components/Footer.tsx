@@ -17,7 +17,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <p className="mb-6 text-sm">© 2025 Orga AI Inc. Todos los derechos reservados.</p>
+        <p className="mb-6 text-sm">© 2025 Orga AI. Todos los derechos reservados.</p>
 
         {/* Links */}
         <div className="flex justify-center space-x-6 text-sm">
@@ -28,7 +28,7 @@ export default function Footer() {
             Términos
           </a>
           <a
-            href="https://docs.orga.ai"
+            href="https://https://docs.orga-ai.com/docs"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors"
