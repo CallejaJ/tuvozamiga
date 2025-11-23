@@ -61,7 +61,7 @@ orga-ai-api/
    ```env
    ORGA_API_KEY=your_orga_api_key_here
    NEXT_PUBLIC_ORGA_MODEL=orga-1-beta
-   NEXT_PUBLIC_ORGA_VOICE=alloy
+   NEXT_PUBLIC_ORGA_VOICE=nova
    ```
 
 4. **Run the development server**
@@ -85,7 +85,7 @@ OrgaAI.init({
   logLevel: "info",
   sessionConfigEndpoint: "/api/orga-client-secrets",
   model: "orga-1-beta",
-  voice: "alloy",
+  voice: "nova",
 });
 ```
 

@@ -254,7 +254,7 @@ function DemoComponent() {
             <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-2">
               Voz
             </h4>
-            <p className="text-slate-900 font-medium">Alloy</p>
+            <p className="text-slate-900 font-medium">nova</p>
           </div>
         </div>
 
