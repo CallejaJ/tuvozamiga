@@ -207,8 +207,8 @@ This project is licensed under the MIT License.
 ## 🔗 Links
 
 - [Orga AI Documentation](https://docs.orga-ai.com/docs/server-sdks/node/quick-start)
-- [Live Demo](https://orga-ai-api.vercel.app)
-- [GitHub Repository](https://github.com/CallejaJ/orga-ai-api)
+- [Live Demo](https://tuvozamiga.vercel.app)
+- [GitHub Repository](https://github.com/CallejaJ/tuvozamiga)
 
 ## 💡 Support
 
