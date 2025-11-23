@@ -4,6 +4,7 @@ import { Zap, Shield, Globe, Play, Square, Mic2 } from "lucide-react";
 import { toast } from "sonner";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import WaveVisualizer from "../components/WaveVisualizer";
 
 export default function Home() {
   return (
@@ -162,10 +163,14 @@ function DemoComponent() {
         </div>
 
         <div className="relative bg-slate-900 rounded-xl overflow-hidden aspect-video shadow-inner mb-6">
-          <OrgaVideo
-            stream={userVideoStream}
-            className="w-full h-full object-cover"
-          />
+          {connectionState === "connected" ? (
+            <WaveVisualizer stream={userVideoStream} />
+          ) : (
+            <OrgaVideo
+              stream={userVideoStream}
+              className="w-full h-full object-cover"
+            />
+          )}
 
           {connectionState === "connected" && (
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
