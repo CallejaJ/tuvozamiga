@@ -17,7 +17,7 @@ Una aplicación diseñada para combatir la soledad, proporcionando una voz amiga
 - **Framework**: [Next.js 16.0.3](https://nextjs.org/)
 - **UI Library**: [React 19.2.0](https://react.dev/)
 - **Styling**: [Tailwind CSS 4.1.9](https://tailwindcss.com/)
-- **AI SDK**: [@orga-ai/react](https://docs.orga-ai.com/) & @orga-ai/node
+- **AI SDK**: [@orga-ai/react](https://docs.orga-ai.com/tutorials) & @orga-ai/node
 - **UI Components**: [Radix UI](https://www.radix-ui.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Analytics**: [Vercel Analytics](https://vercel.com/analytics)
@@ -206,7 +206,7 @@ This project is licensed under the MIT License.
 
 ## 🔗 Links
 
-- [Orga AI Documentation](https://docs.orga-ai.com/docs/server-sdks/node/quick-start)
+- [Orga AI Documentation](https://docs.orga-ai.com/tutorials)
 - [Live Demo](https://tuvozamiga.vercel.app)
 - [GitHub Repository](https://github.com/CallejaJ/tuvozamiga)
 
@@ -215,7 +215,7 @@ This project is licensed under the MIT License.
 For issues and questions:
 
 - Open an issue on GitHub
-- Check the [Orga AI documentation](https://docs.orga-ai.com)
+- Check the [Orga AI documentation](https://docs.orga-ai.com/tutorials)
 - Contact support at support@orga-ai.com
 
 ---

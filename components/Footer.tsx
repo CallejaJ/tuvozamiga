@@ -28,7 +28,7 @@ export default function Footer() {
             Términos
           </a>
           <a
-            href="https://https://docs.orga-ai.com/docs"
+            href="https://docs.orga-ai.com/tutorials"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white transition-colors"
