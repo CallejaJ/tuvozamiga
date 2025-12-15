@@ -188,9 +188,9 @@ function DemoComponent() {
         </div>
       </div>
 
-      <div className="p-6 md:p-8">
+      <div className="p-4 sm:p-6 md:p-8">
         {/* Main Visualizer Area */}
-        <div className="relative bg-gradient-to-b from-slate-900 to-slate-800 rounded-2xl overflow-hidden aspect-video shadow-inner ring-1 ring-black/5 mb-8 group">
+        <div className="relative bg-gradient-to-b from-slate-900 to-slate-800 rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-video shadow-inner ring-1 ring-black/5 mb-6 md:mb-8 group">
           {connectionState === "connected" ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <WaveVisualizer stream={audioStream} />
@@ -200,16 +200,16 @@ function DemoComponent() {
           )}
 
           {/* Overlay Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-10">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-4 md:p-6 text-center z-10">
             {!userVideoStream && connectionState !== "connected" && (
-               <div className="space-y-6 max-w-md animate-in fade-in zoom-in duration-500">
-                  <div className="h-20 w-20 bg-white/10 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-white/10 ring-4 ring-white/5">
-                    <Mic2 className="h-8 w-8 text-white" />
+               <div className="space-y-4 md:space-y-6 max-w-md animate-in fade-in zoom-in duration-500 w-full">
+                  <div className="h-16 w-16 md:h-20 md:w-20 bg-white/10 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-white/10 ring-4 ring-white/5">
+                    <Mic2 className="h-6 w-6 md:h-8 md:w-8 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Listo para conversar</h3>
-                    <p className="text-slate-300 text-sm md:text-base">
-                      Experimenta la latencia ultra baja de OrgaAI. Haz clic en iniciar para conectar.
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Listo para conversar</h3>
+                    <p className="text-slate-300 text-sm md:text-base px-2">
+                      Experimenta la latencia ultra baja de OrgaAI. Pulsa iniciar para conectar.
                     </p>
                   </div>
                </div>
@@ -225,10 +225,10 @@ function DemoComponent() {
           
            {/* Mic Warning */}
            {connectionState === "connected" && !isMicOn && (
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-auto">
-              <div className="flex items-center gap-3 bg-red-500/90 text-white px-5 py-2.5 rounded-full shadow-lg backdrop-blur-md animate-in fade-in slide-in-from-bottom-4">
-                <Mic2 className="h-4 w-4" />
-                <span className="text-sm font-medium">El micrófono está desactivado</span>
+            <div className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 z-20 w-max max-w-[90%]">
+              <div className="flex items-center gap-2 md:gap-3 bg-red-500/90 text-white px-4 py-2 md:px-5 md:py-2.5 rounded-full shadow-lg backdrop-blur-md animate-in fade-in slide-in-from-bottom-4">
+                <Mic2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                <span className="text-xs md:text-sm font-medium truncate">Micrófono desactivado</span>
               </div>
             </div>
           )}
