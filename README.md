@@ -1,28 +1,28 @@
-# TUVOZAMIGA - Tu Compañía Virtual
+# TUVOZAMIGA - Virtual Companion
 
-Una aplicación diseñada para combatir la soledad, proporcionando una voz amiga y escucha activa potenciada por IA.
+A web application designed to combat loneliness by providing a friendly voice and active listening powered by AI.
 
-> **🎧 Recomendación:** Para una mejor experiencia, se recomienda el uso de auriculares.
+> **Note:** For the best experience, the use of headphones is recommended.
 
-## 🚀 Features
+## Features
 
-- **Siempre Disponible**: Compañía 24/7 con latencia ultra baja
-- **Control de Micrófono**: Tú decides cuándo hablar
-- **Estado de Conexión**: Feedback visual claro del estado de tu compañero
-- **Interfaz Amigable**: Diseño cálido y acogedor, totalmente en español
-- **Escucha Empática**: IA diseñada para comprender y acompañar
+- **Always Available**: 24/7 companionship with ultra-low latency.
+- **Microphone Control**: You decide when to speak.
+- **Connection Status**: Clear visual feedback on your companion's status.
+- **Friendly Interface**: Warm and welcoming design.
+- **Empathetic Listening**: AI designed to understand and accompany.
 
-## 📦 Tech Stack
+## Tech Stack
 
 - **Framework**: [Next.js 16.0.3](https://nextjs.org/)
 - **UI Library**: [React 19.2.0](https://react.dev/)
 - **Styling**: [Tailwind CSS 4.1.9](https://tailwindcss.com/)
-- **AI SDK**: [@orga-ai/react](https://docs.orga-ai.com/tutorials) & @orga-ai/node
+- **AI SDK**: @orga-ai/react & @orga-ai/node
 - **UI Components**: [Radix UI](https://www.radix-ui.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Analytics**: [Vercel Analytics](https://vercel.com/analytics)
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 orga-ai-api/
@@ -42,7 +42,7 @@ orga-ai-api/
 └── tsconfig.json          # TypeScript configuration
 ```
 
-## 🛠️ Installation
+## Installation
 
 1. **Clone the repository**
 
@@ -75,7 +75,7 @@ orga-ai-api/
 5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🎯 Key Components
+## Key Components
 
 ### OrgaAI Provider Setup
 
@@ -112,27 +112,7 @@ The `useOrgaAI()` hook provides:
 - `aiAudioStream` - AI audio MediaStream
 - `toggleMic()` - Enable/disable microphone
 
-## 🎨 UI Components
-
-The interface includes:
-
-- **Hero Section**: Gradient background with call-to-action buttons
-- **Features Grid**: Showcasing key capabilities (low latency, security, edge deployment)
-- **Interactive Demo**: Full-featured video conference interface
-- **Status Indicators**: Real-time connection state visualization
-
-## 📝 Scripts
-
-```json
-{
-  "dev": "next dev", // Start development server
-  "build": "next build", // Build for production
-  "start": "next start", // Start production server
-  "lint": "eslint ." // Run ESLint
-}
-```
-
-## 🚀 Deployment
+## Deployment
 
 ### Vercel Deployment
 
@@ -148,76 +128,32 @@ The interface includes:
 - TypeScript errors are ignored in build (`ignoreBuildErrors: true`)
 - Images are unoptimized for faster builds
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### `/api/orga-client-secrets`
 
-This endpoint should return session configuration for the Orga AI client. Example implementation:
+This endpoint should return session configuration for the Orga AI client.
 
-```typescript
-export async function GET() {
-  // Return session configuration
-  return Response.json({
-    apiKey: process.env.ORGA_API_KEY,
-    // Additional config...
-  });
-}
-```
-
-## 🎯 Usage Guide
-
-1. **Starting a Session**
-
-   - Click "Iniciar Sesión" button
-   - Allow microphone access when prompted
-   - Wait for connection to establish (status indicator turns green)
-
-2. **During Session**
-
-   - Speak naturally to interact with the AI
-   - Toggle microphone as needed
-   - Monitor connection status indicator
-
-3. **Ending Session**
-   - Click "Terminar Sesión" to terminate
-   - Resources are automatically cleaned up
-
-## 🔐 Security Features
+## Security Features
 
 - End-to-end encryption for all streams
 - No data storage - privacy by design
 - Secure session token management
 - Environment variable protection for API keys
 
-## 📊 Performance
-
-- Optimized for ultra-low latency communication
-- Edge deployment ready
-- Efficient resource management
-- Automatic reconnection handling
-
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
 
-## 🔗 Links
+## Links
 
 - [Orga AI Documentation](https://docs.orga-ai.com/tutorials)
-- [Live Demo](https://tuvozamiga.vercel.app)
 - [GitHub Repository](https://github.com/CallejaJ/tuvozamiga)
-
-## 💡 Support
-
-For issues and questions:
-
-- Open an issue on GitHub
-- Check the [Orga AI documentation](https://docs.orga-ai.com/tutorials)
-- Contact support at support@orga-ai.com
 
 ---
 
-Built with ❤️ using Orga AI SDK
+Built using Orga AI SDK
