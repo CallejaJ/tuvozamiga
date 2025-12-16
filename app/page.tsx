@@ -235,47 +235,68 @@ function DemoComponent() {
         </div>
 
         {/* Control Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
-          <button
-            onClick={() => startSession()}
-            disabled={!canStart}
-            className={`group relative w-full md:w-auto min-w-[160px] inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-white transition-all transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ${
-                !canStart ? 'bg-slate-300' : 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:shadow-lg hover:shadow-indigo-500/30'
-            }`}
-          >
-            <span className="absolute inset-0 rounded-xl bg-white/20 group-hover:opacity-100 opacity-0 transition-opacity" />
-            <Play className="h-5 w-5 mr-2.5 fill-current" />
-            <span>Iniciar Sesión</span>
-          </button>
+        <div className="space-y-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+            <button
+              onClick={() => startSession()}
+              disabled={!canStart}
+              className={`group relative w-full md:w-auto min-w-[160px] inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold text-white transition-all transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ${
+                  !canStart ? 'bg-slate-300' : 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:shadow-lg hover:shadow-indigo-500/30'
+              }`}
+            >
+              <span className="absolute inset-0 rounded-xl bg-white/20 group-hover:opacity-100 opacity-0 transition-opacity" />
+              <Play className="h-5 w-5 mr-2.5 fill-current" />
+              <span>Iniciar Sesión</span>
+            </button>
 
-          <button
-            onClick={() => endSession()}
-            disabled={!canEnd}
-            className={`w-full md:w-auto min-w-[160px] inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold transition-all border-2 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ${
-                !canEnd 
-                ? 'border-slate-100 text-slate-300 bg-slate-50' 
-                : 'border-red-100 text-red-600 bg-red-50/50 hover:bg-red-50 hover:border-red-200'
-            }`}
-          >
-            <Square className="h-5 w-5 mr-2.5 fill-current" />
-            <span>Terminar</span>
-          </button>
-          
-           {connectionState === "connected" && (
-            <div className="w-full md:w-auto flex justify-center pt-4 md:pt-0 md:border-l md:border-slate-100 md:pl-6">
-               <button
+            <button
+              onClick={() => endSession()}
+              disabled={!canEnd}
+              className={`w-full md:w-auto min-w-[160px] inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-bold transition-all border-2 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ${
+                  !canEnd 
+                  ? 'border-slate-100 text-slate-300 bg-slate-50' 
+                  : 'border-red-100 text-red-600 bg-red-50/50 hover:bg-red-50 hover:border-red-200'
+              }`}
+            >
+              <Square className="h-5 w-5 mr-2.5 fill-current" />
+              <span>Terminar</span>
+            </button>
+            
+            {connectionState === "connected" && (
+              <button
+                type="button"
                 onClick={toggleMic}
-                className={`p-3.5 rounded-full transition-all duration-200 ring-2 ring-offset-2 ${
+                className={`hidden md:inline-flex p-3.5 rounded-full transition-all duration-200 ring-2 touch-manipulation ${
                     isMicOn 
                     ? 'bg-slate-100 text-slate-700 ring-transparent hover:bg-slate-200' 
                     : 'bg-red-50 text-red-600 ring-red-100 hover:bg-red-100'
                 }`}
                 title={isMicOn ? "Silenciar micrófono" : "Activar micrófono"}
+                aria-label={isMicOn ? "Silenciar micrófono" : "Activar micrófono"}
+              >
+                {isMicOn ? <Mic2 className="h-5 w-5" /> : <div className="relative"><Mic2 className="h-5 w-5"/><div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full border border-white"/></div>}
+              </button>
+            )}
+          </div>
+          
+          {/* Mobile Microphone Button - Separate Row */}
+          {connectionState === "connected" && (
+            <div className="flex md:hidden justify-center">
+              <button
+                type="button"
+                onClick={toggleMic}
+                className={`p-3.5 rounded-full transition-all duration-200 ring-2 touch-manipulation active:scale-95 ${
+                    isMicOn 
+                    ? 'bg-slate-100 text-slate-700 ring-transparent hover:bg-slate-200' 
+                    : 'bg-red-50 text-red-600 ring-red-100 hover:bg-red-100'
+                }`}
+                title={isMicOn ? "Silenciar micrófono" : "Activar micrófono"}
+                aria-label={isMicOn ? "Silenciar micrófono" : "Activar micrófono"}
               >
                 {isMicOn ? <Mic2 className="h-5 w-5" /> : <div className="relative"><Mic2 className="h-5 w-5"/><div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full border border-white"/></div>}
               </button>
             </div>
-           )}
+          )}
         </div>
       </div>
 
