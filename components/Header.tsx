@@ -1,32 +1,53 @@
 "use client";
 import Image from "next/image";
-import { Globe, Headphones } from "lucide-react";
+import { useState } from "react";
+import type React from "react";
+import { Heart, Headphones, Globe, ChevronDown } from "lucide-react";
+import TypewriterWords from "./TypewriterWords";
+import FloatingMessages from "./FloatingMessages";
 
 export default function Header() {
+  // Parallax suave siguiendo el ratón
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    setOffset({ x, y });
+  };
+
   return (
-    <header className="relative overflow-hidden bg-slate-950 text-white min-h-[85vh] flex items-center justify-center">
-      {/* Background Effects matching user reference */}
-      <div className="absolute inset-0 bg-[#020617] pointer-events-none" />
-      
-      {/* Top Left - Blueish Orb */}
-      <div className="absolute -top-[10%] -left-[10%] w-[500px] h-[500px] bg-indigo-600/30 rounded-full blur-[120px] animate-pulse-slow mix-blend-screen" />
-      
-      {/* Top Right - Purple Orb */}
-      <div className="absolute top-[10%] right-[5%] w-[400px] h-[400px] bg-purple-600/25 rounded-full blur-[100px] mix-blend-screen" />
-      
-      {/* Bottom Center - Cyan/Blue Glow */}
-      <div className="absolute -bottom-[20%] left-[20%] w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[130px] mix-blend-screen" />
+    <header
+      onMouseMove={handleMouseMove}
+      className="relative overflow-hidden bg-gradient-to-b from-orange-50 via-amber-50 to-rose-50 text-stone-800 min-h-[92vh] flex items-center justify-center"
+    >
+      {/* Orbes cálidos con parallax + deriva orgánica */}
+      <div
+        className="absolute -top-[10%] -left-[10%] w-[500px] h-[500px] bg-amber-300/40 rounded-full blur-[120px] animate-blob"
+        style={{ translate: `${offset.x * 30}px ${offset.y * 20}px` }}
+      />
+      <div
+        className="absolute top-[15%] right-[0%] w-[420px] h-[420px] bg-rose-300/35 rounded-full blur-[110px] animate-blob animation-delay-2000"
+        style={{ translate: `${offset.x * -25}px ${offset.y * 25}px` }}
+      />
+      <div
+        className="absolute -bottom-[25%] left-[25%] w-[600px] h-[600px] bg-teal-200/30 rounded-full blur-[130px] animate-blob animation-delay-4000"
+        style={{ translate: `${offset.x * 18}px ${offset.y * -18}px` }}
+      />
 
-      {/* Central faint radial gradient to highlight text */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] pointer-events-none" />
+      {/* Luz radial central */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.6)_0%,transparent_70%)] pointer-events-none" />
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-[length:40px_40px] opacity-20 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] pointer-events-none" />
+      {/* Trama sutil */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-[length:40px_40px] opacity-[0.07] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative z-10 py-20">
+      {/* Conversación flotante alrededor del contenido */}
+      <FloatingMessages />
+
+      <div className="container mx-auto px-4 relative z-20 py-20">
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Logo */}
-          <div className="mb-10 animate-fade-in-down">
+          <div className="mb-10 animate-in fade-in slide-in-from-top-4 duration-700">
             <Image
               src="/icon/logo-lille.png"
               alt="Orga AI Logo"
@@ -37,59 +58,85 @@ export default function Header() {
             />
           </div>
 
-          {/* Badges Row */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-8 animate-fade-in-up delay-100">
-            <div className="inline-flex items-center rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-300 backdrop-blur-xl">
-              <span className="flex h-2 w-2 rounded-full bg-indigo-400 mr-2 animate-pulse"></span>
+          {/* Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="inline-flex items-center rounded-full border border-rose-300/60 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-rose-600 backdrop-blur-xl shadow-sm">
+              <Heart className="h-3 w-3 mr-1.5 fill-rose-500 text-rose-500 animate-pulse" />
               TUVOZAMIGA Beta
             </div>
-            <div className="inline-flex items-center rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-xs font-medium text-purple-300 backdrop-blur-xl">
+            <div className="inline-flex items-center rounded-full border border-teal-300/60 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-teal-700 backdrop-blur-xl shadow-sm">
               <Globe className="h-3 w-3 mr-1.5" />
               Disponible en +40 idiomas
             </div>
           </div>
 
-          {/* Title */}
-          <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-8 animate-fade-in-up delay-200">
-            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">
+          {/* Título */}
+          <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500">
               TUVOZAMIGA
             </span>
           </h1>
 
-          {/* Description */}
-          <p className="text-lg md:text-2xl text-slate-300 mb-10 max-w-2xl leading-relaxed font-light animate-fade-in-up delay-300">
-            Tu compañero virtual siempre disponible. Escucha activa, empatía y
-            conversación humana cuando más lo necesitas.
+          {/* Subtítulo dinámico con máquina de escribir */}
+          <p className="text-2xl sm:text-3xl md:text-4xl font-semibold text-stone-700 mb-8 min-h-[1.4em] animate-in fade-in duration-1000">
+            Una voz amiga que{" "}
+            <TypewriterWords
+              words={[
+                "te escucha.",
+                "te acompaña.",
+                "te entiende.",
+                "está contigo.",
+              ]}
+              className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 to-rose-500"
+            />
           </p>
 
-          {/* Headphones Recommendation */}
-          <div className="animate-fade-in-up delay-500">
-             <p className="inline-flex items-center gap-2 text-sm text-indigo-200/80 mb-10 bg-indigo-950/50 py-2 px-5 rounded-full border border-indigo-500/20 hover:border-indigo-500/40 transition-colors cursor-help">
-                <Headphones className="h-4 w-4" /> 
-                Se recomienda usar auriculares para la mejor experiencia
-             </p>
+          {/* Descripción */}
+          <p className="text-lg md:text-xl text-stone-600 mb-10 max-w-2xl leading-relaxed font-light animate-in fade-in slide-in-from-bottom-6 duration-700">
+            Escucha activa, empatía y conversación cálida cuando más lo
+            necesitas. De día o de madrugada.
+          </p>
+
+          {/* Recomendación de auriculares */}
+          <div className="animate-in fade-in duration-1000">
+            <p className="inline-flex items-center gap-2 text-sm text-amber-800/90 mb-10 bg-amber-100/70 py-2 px-5 rounded-full border border-amber-300/50 hover:border-amber-400/70 transition-colors cursor-help">
+              <Headphones className="h-4 w-4" />
+              Se recomienda usar auriculares para la mejor experiencia
+            </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-5 w-full justify-center animate-fade-in-up delay-700">
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-5 w-full justify-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
             <a
               href="#demo"
-              className="group relative inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-bold text-slate-900 shadow-[0_0_20px_-5px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_-5px_rgba(255,255,255,0.5)] transition-all transform hover:-translate-y-0.5"
+              className="group relative inline-flex items-center justify-center rounded-full bg-gradient-to-r from-amber-500 to-rose-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-orange-500/30 hover:shadow-xl hover:shadow-rose-500/40 transition-all transform hover:-translate-y-0.5 hover:scale-[1.02]"
             >
+              <Heart className="h-4 w-4 mr-2 fill-current group-hover:animate-pulse" />
               <span className="relative z-10">Hablar con alguien</span>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-50 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
             <a
               href="https://docs.orga-ai.com/tutorials"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-800/40 px-8 py-4 text-base font-bold text-white hover:bg-slate-800/80 hover:border-slate-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all backdrop-blur-sm"
+              className="inline-flex items-center justify-center rounded-full border border-stone-300 bg-white/70 px-8 py-4 text-base font-bold text-stone-700 hover:bg-white hover:border-stone-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 transition-all backdrop-blur-sm shadow-sm"
             >
               Ver Documentación
             </a>
           </div>
         </div>
       </div>
+
+      {/* Indicador de scroll */}
+      <a
+        href="#demo"
+        aria-label="Ir a la demo"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 text-stone-400 hover:text-rose-500 transition-colors animate-bounce"
+      >
+        <ChevronDown className="h-7 w-7" />
+      </a>
+
+      {/* Fundido hacia la siguiente sección */}
+      <div className="absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t from-white to-transparent pointer-events-none" />
     </header>
   );
 }

@@ -87,16 +87,16 @@ export default function WaveVisualizer({
         centerY,
         glowRadius
       );
-      gradient.addColorStop(0, "rgba(6, 182, 212, 0.8)"); // Cyan-500
-      gradient.addColorStop(0.5, "rgba(6, 182, 212, 0.2)");
-      gradient.addColorStop(1, "rgba(6, 182, 212, 0)");
+      gradient.addColorStop(0, "rgba(251, 146, 60, 0.8)"); // Orange-400
+      gradient.addColorStop(0.5, "rgba(244, 114, 182, 0.25)"); // Pink-400
+      gradient.addColorStop(1, "rgba(251, 146, 60, 0)");
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
       // Draw Waves
       ctx.lineWidth = 2;
-      ctx.strokeStyle = "rgba(165, 243, 252, 0.6)"; // Cyan-200
+      ctx.strokeStyle = "rgba(254, 215, 170, 0.7)"; // Orange-200
       ctx.beginPath();
 
       const bufferLength = analyser ? analyser.frequencyBinCount : 128;
@@ -140,7 +140,7 @@ export default function WaveVisualizer({
 
       // Additional decorative lines
       ctx.beginPath();
-      ctx.strokeStyle = "rgba(6, 182, 212, 0.3)";
+      ctx.strokeStyle = "rgba(251, 113, 133, 0.35)"; // Rose-400
       ctx.lineWidth = 1;
       
       for (let i = 0; i < 3; i++) {

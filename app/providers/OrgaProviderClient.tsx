@@ -21,7 +21,7 @@ export default function OrgaProviderClient({
           logLevel: "info",
           sessionConfigEndpoint: "/api/orga-client-secrets",
           model: "orga-1-beta",
-          voice: "nova",
+          voice: "Sofía",
         });
 
         initialized.current = true;
