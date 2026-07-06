@@ -21,7 +21,8 @@ export default function OrgaProviderClient({
           logLevel: "info",
           sessionConfigEndpoint: "/api/orga-client-secrets",
           model: "orga-1-beta",
-          voice: "Sofía",
+          // El SDK instalado tipa las voces antiguas; la API acepta las nuevas
+          voice: "Sofía" as never,
         });
 
         initialized.current = true;

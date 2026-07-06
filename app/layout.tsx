@@ -1,28 +1,28 @@
 // app/layout.tsx
 import type React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { OrgaClientProvider } from "./providers/OrgaClientProvider";
 import { Toaster } from "@/components/ui/sonner";
 
 const geist = Geist({ subsets: ["latin"] });
-const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Orga AI - Next-Gen AI Interfaces",
+  title: "TUVOZAMIGA - Una voz amiga que te escucha",
   description:
-    "Experience the future of human-computer interaction with real-time video and audio processing, powered by Orga AI.",
+    "Escucha activa, empatía y conversación cálida cuando más lo necesitas. Una voz amiga disponible de día o de madrugada, directamente en tu navegador.",
   keywords: [
-    "AI",
-    "WebRTC",
-    "real-time",
-    "video chat",
-    "voice assistant",
-    "orga ai",
+    "voz amiga",
+    "compañía",
+    "escucha activa",
+    "soledad",
+    "conversación",
+    "asistente de voz",
+    "tuvozamiga",
   ],
-  authors: [{ name: "Orga AI" }],
+  authors: [{ name: "TUVOZAMIGA" }],
   icons: {
     icon: [
       {
@@ -62,19 +62,19 @@ export const metadata: Metadata = {
   },
   manifest: "/favicon/site.webmanifest",
   openGraph: {
-    title: "Orga AI - Next-Gen AI Interfaces",
+    title: "TUVOZAMIGA - Una voz amiga que te escucha",
     description:
-      "Experience the future of human-computer interaction with real-time video and audio processing",
-    url: "https://your-domain.vercel.app",
-    siteName: "Orga AI",
-    locale: "en_US",
+      "Escucha activa, empatía y conversación cálida cuando más lo necesitas. De día o de madrugada.",
+    url: "https://tuvozamiga.vercel.app",
+    siteName: "TUVOZAMIGA",
+    locale: "es_ES",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Orga AI - Next-Gen AI Interfaces",
+    title: "TUVOZAMIGA - Una voz amiga que te escucha",
     description:
-      "Experience the future of human-computer interaction with real-time video and audio processing",
+      "Escucha activa, empatía y conversación cálida cuando más lo necesitas. De día o de madrugada.",
   },
 };
 
@@ -84,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body className={`${geist.className} antialiased`}>
         <OrgaClientProvider>{children}</OrgaClientProvider>
         <Analytics />
