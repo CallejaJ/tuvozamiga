@@ -33,11 +33,21 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex justify-center space-x-6 text-sm">
-          <a href="#" className="hover:text-amber-300 transition-colors">
-            Privacidad
+          <a
+            href="https://orga-ai.com/privacy-policy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-300 transition-colors"
+          >
+            Política de Privacidad
           </a>
-          <a href="#" className="hover:text-amber-300 transition-colors">
-            Términos
+          <a
+            href="https://orga-ai.com/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-amber-300 transition-colors"
+          >
+            Sobre Orga AI
           </a>
           <a
             href="https://docs.orga-ai.com/tutorials"
