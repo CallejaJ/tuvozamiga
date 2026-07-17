@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useOrgaAI, OrgaVideo, OrgaAudio } from "@orga-ai/react";
+import type { OrgaAIVoice } from "@orga-ai/react";
 import { Heart, Shield, Clock, Play, Square, Mic2 } from "lucide-react";
 import { toast } from "sonner";
 import Header from "../components/Header";
@@ -9,16 +10,18 @@ import WaveVisualizer from "../components/WaveVisualizer";
 import Reveal from "../components/Reveal";
 import VoiceOrb from "../components/VoiceOrb";
 
-// Voces en español disponibles en Orga AI
-const VOICES = [
-  { id: "Sofía", label: "Sofía · Cálida y animada" },
-  { id: "Marta - Relaxed Woman", label: "Marta · Tranquila" },
-  { id: "Teresa - Caring Mother", label: "Teresa · Maternal" },
-  { id: "Lucía - Instructor", label: "Lucía · Cercana" },
-  { id: "Clara - Narrator", label: "Clara · Serena" },
-  { id: "Álvaro - Self-assured Young Professional", label: "Álvaro · Seguro" },
-  { id: "Emilio - Digital Voice", label: "Emilio · Natural" },
-  { id: "Juan - Formal Presenter", label: "Juan · Formal" },
+// Voces en español disponibles en Orga AI (identificador = nombre corto)
+const VOICES: { id: OrgaAIVoice; label: string }[] = [
+  { id: "Sofía", label: "Sofía · Suave y tranquila" },
+  { id: "Marta", label: "Marta · Relajada" },
+  { id: "Teresa", label: "Teresa · Maternal" },
+  { id: "Lucía", label: "Lucía · Cercana" },
+  { id: "Clara", label: "Clara · Serena" },
+  { id: "Natalia", label: "Natalia · Profesional" },
+  { id: "Álvaro", label: "Álvaro · Seguro" },
+  { id: "Emilio", label: "Emilio · Natural" },
+  { id: "Juan", label: "Juan · Formal" },
+  { id: "Ricardo", label: "Ricardo · Locutor" },
 ];
 
 export default function Home() {
@@ -125,13 +128,14 @@ function DemoComponent() {
     connectionState === "disconnected" || connectionState === "closed";
   const canEnd = connectionState === "connected";
 
-  const [selectedVoice, setSelectedVoice] = React.useState("Sofía");
+  const [selectedVoice, setSelectedVoice] =
+    React.useState<OrgaAIVoice>("Sofía");
 
   const handleVoiceChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const voice = e.target.value;
+    const voice = e.target.value as OrgaAIVoice;
     setSelectedVoice(voice);
-    // El SDK instalado tipa las voces antiguas; la API acepta las nuevas
-    updateParams({ voice: voice as never });
+    // Si hay sesión abierta, el SDK envía el cambio por el canal de datos
+    updateParams({ voice });
   };
 
   const [audioStream, setAudioStream] = React.useState<MediaStream | null>(null);
@@ -298,7 +302,8 @@ function DemoComponent() {
         <div className="space-y-4">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
             <button
-              onClick={() => startSession()}
+              // startSession ignora updateParams al conectar: hay que pasar la voz aquí
+              onClick={() => startSession({ voice: selectedVoice })}
               disabled={!canStart}
               className={`group relative w-full md:w-auto min-w-[160px] inline-flex items-center justify-center px-8 py-3.5 rounded-full font-bold text-white transition-all transform active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ${
                 !canStart
