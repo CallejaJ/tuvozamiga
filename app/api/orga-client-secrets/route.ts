@@ -11,18 +11,10 @@ export async function GET() {
       { status: 500 }
     );
   }
-  if (!process.env.USER_EMAIL) {
-    console.error("❌ USER_EMAIL no configurada en .env.local");
-    return NextResponse.json(
-      { error: "USER_EMAIL no configurada" },
-      { status: 500 }
-    );
-  }
-
   try {
+    // @orga-ai/node >= 1.0.0: ya no requiere userEmail
     const orga = new OrgaAI({
       apiKey: process.env.ORGA_API_KEY,
-      userEmail: process.env.USER_EMAIL,
     });
     const config = await orga.getSessionConfig();
     return NextResponse.json(config, { status: 200 });
