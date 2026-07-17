@@ -54,7 +54,7 @@ export default function Header() {
               width={180}
               height={54}
               priority
-              className="h-10 w-auto opacity-90 hover:opacity-100 transition-opacity"
+              className="h-10 w-auto [filter:brightness(0)] opacity-55 hover:opacity-75 transition-opacity"
             />
           </div>
 
@@ -123,6 +123,9 @@ export default function Header() {
               Ver Documentación
             </a>
           </div>
+
+          {/* Conversación en móvil (en escritorio flota a los lados) */}
+          <FloatingMessages variant="inline" />
         </div>
       </div>
 
